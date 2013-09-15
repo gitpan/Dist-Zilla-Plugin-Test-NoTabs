@@ -1,0 +1,13 @@
+Revision history for Dist-Zilla-Plugin-Test-NoTabs
+
+0.02      2013-09-15 03:24:28Z (Karen Etheridge)
+    - now dies if Test::NoTabs is not present, rather than skipping test
+    - develop require prerequisites are now injected into the distribution
+    - now includes the list of files to check inside the test, allowing
+      customization of files to search via filefinder options; also works
+      around issue with Test::NoTabs that tests nothing when the test is two
+      levels deep from the dist root (RT#88042)
+    - renamed [NoTabsTests] to [Test::NoTabs].
+
+0.01      2010-05-29 17:02:08 +0200
+    - Split off of Dist::Zilla::Plugin::SanityTests.
