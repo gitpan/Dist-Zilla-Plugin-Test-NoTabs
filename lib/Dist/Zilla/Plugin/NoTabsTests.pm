@@ -3,7 +3,7 @@ BEGIN {
   $Dist::Zilla::Plugin::NoTabsTests::AUTHORITY = 'cpan:FLORA';
 }
 {
-  $Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.03';
+  $Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.04';
 }
 # ABSTRACT: (DEPRECATED) Release tests making sure hard tabs aren't used
 
@@ -25,7 +25,7 @@ __END__
 
 =encoding utf-8
 
-=for :stopwords Florian Ragwitz Karen Etheridge
+=for :stopwords Florian Ragwitz
 
 =head1 NAME
 
@@ -33,7 +33,7 @@ Dist::Zilla::Plugin::NoTabsTests - (DEPRECATED) Release tests making sure hard t
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

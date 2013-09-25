@@ -62,8 +62,13 @@ my @files = (
 
 like($content, qr/'\Q$_\E'/m, "test checks $_") foreach @files;
 
+# not needed, but Test::NoTabs loads it from the generated test, and $0 is wrong for it
+# (FIXME in Test::NoTabs!!)
+use FindBin;
+
 my $cwd = getcwd;
 my $files_tested;
+
 subtest 'run the generated test' => sub
 {
     chdir $build_dir;

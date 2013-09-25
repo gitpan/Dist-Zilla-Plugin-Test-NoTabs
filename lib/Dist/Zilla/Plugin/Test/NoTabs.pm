@@ -3,9 +3,9 @@ BEGIN {
   $Dist::Zilla::Plugin::Test::NoTabs::AUTHORITY = 'cpan:FLORA';
 }
 {
-  $Dist::Zilla::Plugin::Test::NoTabs::VERSION = '0.03';
+  $Dist::Zilla::Plugin::Test::NoTabs::VERSION = '0.04';
 }
-# git description: v0.02-7-g3d6522d
+# git description: v0.03-1-g8e9d5bb
 
 # ABSTRACT: Release tests making sure hard tabs aren't used
 
@@ -109,7 +109,7 @@ Dist::Zilla::Plugin::Test::NoTabs - Release tests making sure hard tabs aren't u
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

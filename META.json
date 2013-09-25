@@ -65,6 +65,7 @@
             "ExtUtils::MakeMaker" : "0",
             "File::Spec" : "0",
             "File::Spec::Functions" : "0",
+            "FindBin" : "0",
             "IO::Handle" : "0",
             "IPC::Open3" : "0",
             "List::Util" : "0",
@@ -81,11 +82,11 @@
    "provides" : {
       "Dist::Zilla::Plugin::NoTabsTests" : {
          "file" : "lib/Dist/Zilla/Plugin/NoTabsTests.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       },
       "Dist::Zilla::Plugin::Test::NoTabs" : {
          "file" : "lib/Dist/Zilla/Plugin/Test/NoTabs.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       }
    },
    "release_status" : "stable",
@@ -101,7 +102,7 @@
          "web" : "https://github.com/karenetheridge/Dist-Zilla-Plugin-Test-NoTabs"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.019004"

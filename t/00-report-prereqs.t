@@ -21,6 +21,7 @@ my @modules = qw(
   ExtUtils::MakeMaker
   File::Spec
   File::Spec::Functions
+  FindBin
   IO::Handle
   IPC::Open3
   List::Util
