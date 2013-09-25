@@ -1,11 +1,11 @@
 package Dist::Zilla::Plugin::Test::NoTabs;
 BEGIN {
-  $Dist::Zilla::Plugin::Test::NoTabs::AUTHORITY = 'cpan:ETHER';
+  $Dist::Zilla::Plugin::Test::NoTabs::AUTHORITY = 'cpan:FLORA';
 }
 {
-  $Dist::Zilla::Plugin::Test::NoTabs::VERSION = '0.02';
+  $Dist::Zilla::Plugin::Test::NoTabs::VERSION = '0.03';
 }
-# git description: 0.01-11-ge559c4b
+# git description: v0.02-7-g3d6522d
 
 # ABSTRACT: Release tests making sure hard tabs aren't used
 
@@ -109,7 +109,7 @@ Dist::Zilla::Plugin::Test::NoTabs - Release tests making sure hard tabs aren't u
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -173,7 +173,7 @@ ___[ xt/release/no-tabs.t ]___
 use strict;
 use warnings;
 
-# this test was generated with {{ ref($plugin) . ' ' . $plugin->VERSION }}
+# this test was generated with {{ ref($plugin) . ' ' . ($plugin->VERSION || '<self>') }}
 
 use Test::More 0.88;
 use Test::NoTabs;

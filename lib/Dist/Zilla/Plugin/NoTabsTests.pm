@@ -1,9 +1,9 @@
 package Dist::Zilla::Plugin::NoTabsTests;
 BEGIN {
-  $Dist::Zilla::Plugin::NoTabsTests::AUTHORITY = 'cpan:ETHER';
+  $Dist::Zilla::Plugin::NoTabsTests::AUTHORITY = 'cpan:FLORA';
 }
 {
-  $Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.02';
+  $Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.03';
 }
 # ABSTRACT: (DEPRECATED) Release tests making sure hard tabs aren't used
 
@@ -33,7 +33,7 @@ Dist::Zilla::Plugin::NoTabsTests - (DEPRECATED) Release tests making sure hard t
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

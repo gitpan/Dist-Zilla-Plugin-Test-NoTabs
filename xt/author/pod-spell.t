@@ -20,6 +20,6 @@ lib
 Dist
 Zilla
 Plugin
-NoTabsTests
 Test
 NoTabs
+NoTabsTests

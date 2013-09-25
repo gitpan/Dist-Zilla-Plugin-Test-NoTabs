@@ -5,6 +5,7 @@ use Test::More;
 use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 use Test::DZil;
 use Path::Tiny;
+use Cwd;
 
 BEGIN {
     use Dist::Zilla::Plugin::Test::NoTabs;
@@ -60,5 +61,21 @@ my @files = (
 );
 
 like($content, qr/'\Q$_\E'/m, "test checks $_") foreach @files;
+
+my $cwd = getcwd;
+my $files_tested;
+subtest 'run the generated test' => sub
+{
+    chdir $build_dir;
+
+    do $file;
+    warn $@ if $@;
+
+    $files_tested = Test::Builder->new->current_test;
+};
+
+is($files_tested, @files, 'correct number of files were tested');
+
+chdir $cwd;
 
 done_testing;
