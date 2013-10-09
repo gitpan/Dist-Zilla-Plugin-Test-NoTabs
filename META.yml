@@ -20,7 +20,7 @@ build_requires:
   warnings: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
-  Module::Build::Tiny: 0.027
+  Module::Build::Tiny: 0.028
 dynamic_config: 0
 generated_by: 'Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.132620'
 license: perl
@@ -36,10 +36,10 @@ no_index:
 provides:
   Dist::Zilla::Plugin::NoTabsTests:
     file: lib/Dist/Zilla/Plugin/NoTabsTests.pm
-    version: 0.04
+    version: 0.05
   Dist::Zilla::Plugin::Test::NoTabs:
     file: lib/Dist/Zilla/Plugin/Test/NoTabs.pm
-    version: 0.04
+    version: 0.05
 requires:
   Data::Section: 0.004
   Dist::Zilla::File::InMemory: 0
@@ -57,7 +57,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test-NoTabs
   homepage: https://github.com/karenetheridge/Dist-Zilla-Plugin-Test-NoTabs
   repository: https://github.com/karenetheridge/Dist-Zilla-Plugin-Test-NoTabs.git
-version: 0.04
+version: 0.05
 x_Dist_Zilla:
   perl:
     version: 5.019004
@@ -89,11 +89,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::PromptIfStale
       name: '@Author::ETHER/build'
-      version: 0.006
+      version: 0.007
     -
       class: Dist::Zilla::Plugin::PromptIfStale
       name: '@Author::ETHER/release'
-      version: 0.006
+      version: 0.007
     -
       class: Dist::Zilla::Plugin::ExecDir
       name: '@Author::ETHER/ExecDir'
@@ -140,11 +140,11 @@ x_Dist_Zilla:
             - ':ExecFiles'
             - '@Author::ETHER/Examples'
       name: '@Author::ETHER/Test::Compile'
-      version: 2.033
+      version: 2.034
     -
       class: Dist::Zilla::Plugin::Test::CheckDeps
       name: '@Author::ETHER/Test::CheckDeps'
-      version: 0.008
+      version: 0.009
     -
       class: Dist::Zilla::Plugin::EOLTests
       name: '@Author::ETHER/EOLTests'
@@ -219,8 +219,13 @@ x_Dist_Zilla:
       version: 4.300039
     -
       class: Dist::Zilla::Plugin::PodWeaver
+      config:
+        Dist::Zilla::Plugin::PodWeaver:
+          finder:
+            - ':InstallModules'
+            - ':ExecFiles'
       name: '@Author::ETHER/PodWeaver'
-      version: 3.101642
+      version: 3.102000
     -
       class: Dist::Zilla::Plugin::NextRelease
       name: '@Author::ETHER/NextRelease'
@@ -228,7 +233,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::GithubMeta
       name: '@Author::ETHER/GithubMeta'
-      version: 0.38
+      version: 0.42
     -
       class: Dist::Zilla::Plugin::AutoMetaResources
       name: '@Author::ETHER/AutoMetaResources'
@@ -290,7 +295,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::InstallGuide
       name: '@Author::ETHER/InstallGuide'
-      version: 1.200000
+      version: 1.200001
     -
       class: Dist::Zilla::Plugin::CopyFilesFromBuild
       name: '@Author::ETHER/CopyFilesFromBuild'
@@ -310,11 +315,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts
       name: '@Author::ETHER/Git::CheckFor::MergeConflicts'
-      version: 0.006
+      version: 0.007
     -
       class: Dist::Zilla::Plugin::Git::CheckFor::CorrectBranch
       name: '@Author::ETHER/Git::CheckFor::CorrectBranch'
-      version: 0.006
+      version: 0.007
     -
       class: Dist::Zilla::Plugin::Git::Remote::Check
       name: '@Author::ETHER/Git::Remote::Check'
