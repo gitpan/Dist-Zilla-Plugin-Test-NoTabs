@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution Dist-Zilla-Plugin-Test-NoTabs,
-version 0.05:
+version 0.06:
 
   Release tests making sure hard tabs aren't used
 

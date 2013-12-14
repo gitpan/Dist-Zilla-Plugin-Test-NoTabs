@@ -1,9 +1,9 @@
 package Dist::Zilla::Plugin::NoTabsTests;
+{
+  $Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.06';
+}
 BEGIN {
   $Dist::Zilla::Plugin::NoTabsTests::AUTHORITY = 'cpan:FLORA';
-}
-{
-  $Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.05';
 }
 # ABSTRACT: (DEPRECATED) Release tests making sure hard tabs aren't used
 
@@ -13,8 +13,9 @@ extends 'Dist::Zilla::Plugin::Test::NoTabs';
 use namespace::autoclean;
 
 # don't start warning just yet - give people a little bit of time to update
+# warning will be added on Jan 1 2014.
 #before register_component => sub {
-#    warn "!!! [NoTabsTests] is deprecated and may be removed in a future release; replace it with [Test::NoTabs]\n";
+#    warn "!!! [NoTabsTests] is deprecated and will be removed in a future release; replace it with [Test::NoTabs]\n";
 #};
 
 __PACKAGE__->meta->make_immutable;
@@ -23,7 +24,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =for :stopwords Florian Ragwitz
 
@@ -33,7 +34,7 @@ Dist::Zilla::Plugin::NoTabsTests - (DEPRECATED) Release tests making sure hard t
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

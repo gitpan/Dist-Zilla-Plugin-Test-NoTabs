@@ -1,12 +1,12 @@
 package Dist::Zilla::Plugin::Test::NoTabs;
+{
+  $Dist::Zilla::Plugin::Test::NoTabs::VERSION = '0.06';
+}
+# git description: v0.05-5-g4c68a24
+
 BEGIN {
   $Dist::Zilla::Plugin::Test::NoTabs::AUTHORITY = 'cpan:FLORA';
 }
-{
-  $Dist::Zilla::Plugin::Test::NoTabs::VERSION = '0.05';
-}
-# git description: v0.04-1-gff87e8c
-
 # ABSTRACT: Release tests making sure hard tabs aren't used
 
 use Moose;
@@ -31,6 +31,17 @@ with
         default_finders => [ ':ExecFiles' ],
     },
     'Dist::Zilla::Role::PrereqSource';
+
+has files => (
+    isa => 'ArrayRef[Str]',
+    traits => ['Array'],
+    handles => { files => 'elements' },
+    lazy => 1,
+    default => sub { [] },
+);
+
+sub mvp_multivalue_args { qw(files) }
+sub mvp_aliases { return { file => 'files' } }
 
 around dump_config => sub
 {
@@ -79,6 +90,7 @@ sub munge_file
 
     my @filenames = map { path($_->name)->relative('.')->stringify }
         (@{ $self->found_module_files }, @{ $self->found_script_files });
+    push @filenames, $self->files;
 
     $self->log_debug('adding file ' . $_) foreach @filenames;
 
@@ -99,7 +111,7 @@ __PACKAGE__->meta->make_immutable;
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =for :stopwords Florian Ragwitz Karen Etheridge FileFinder executables
 
@@ -109,7 +121,7 @@ Dist::Zilla::Plugin::Test::NoTabs - Release tests making sure hard tabs aren't u
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -130,7 +142,8 @@ This plugin accepts the following options:
 
 =item * C<module_finder>
 
-=for Pod::Coverage::TrustPod register_prereqs
+=for Pod::Coverage::TrustPod mvp_aliases
+    register_prereqs
     gather_files
     munge_file
 
@@ -148,6 +161,9 @@ L<[FileFinder::ByName]|Dist::Zilla::Plugin::FileFinder::ByName> plugin.
 Just like C<module_finder>, but for finding scripts.  The default value is
 C<:ExecFiles> (see also L<Dist::Zilla::Plugin::ExecDir>, to make sure these
 files are properly marked as executables for the installer).
+
+=item * C<file>: a filename to also test, in addition to any files found
+earlier. This option can be repeated to specify multiple additional files.
 
 =back
 
