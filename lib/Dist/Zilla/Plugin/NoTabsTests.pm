@@ -1,22 +1,17 @@
 package Dist::Zilla::Plugin::NoTabsTests;
-{
-  $Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.06';
-}
 BEGIN {
   $Dist::Zilla::Plugin::NoTabsTests::AUTHORITY = 'cpan:FLORA';
 }
 # ABSTRACT: (DEPRECATED) Release tests making sure hard tabs aren't used
-
+$Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.07';
 use Moose;
 extends 'Dist::Zilla::Plugin::Test::NoTabs';
 
 use namespace::autoclean;
 
-# don't start warning just yet - give people a little bit of time to update
-# warning will be added on Jan 1 2014.
-#before register_component => sub {
-#    warn "!!! [NoTabsTests] is deprecated and will be removed in a future release; replace it with [Test::NoTabs]\n";
-#};
+before register_component => sub {
+    warn "!!! [NoTabsTests] is deprecated and may be removed in a future release; replace it with [Test::NoTabs]\n";
+};
 
 __PACKAGE__->meta->make_immutable;
 
@@ -34,7 +29,7 @@ Dist::Zilla::Plugin::NoTabsTests - (DEPRECATED) Release tests making sure hard t
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
@@ -51,9 +46,9 @@ providing the file F<xt/release/no-tabs.t>, a standard L<Test::NoTabs> test.
 
 THIS MODULE IS DEPRECATED. Please use
 L<Dist::Zilla::Plugin::Test::NoTabs> instead. it may be removed at a
-later time (but not before June 2014).
+later time (but not before October 2014).
 
-In the meantime, it will continue working -- although (soon) with a warning.
+In the meantime, it will continue working -- although with a warning.
 Refer to the replacement for the actual documentation.
 
 =head1 AUTHOR
