@@ -9,7 +9,7 @@ use warnings;
 BEGIN {
 my %configure_requires = (
     'ExtUtils::MakeMaker' => '6.30',
-    'Module::Build::Tiny' => '0.035',
+    'Module::Build::Tiny' => '0.036',
 );
 
 my @missing = grep {
@@ -73,7 +73,7 @@ my %WriteMakefileArgs = (
   "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30",
-    "Module::Build::Tiny" => "0.035"
+    "Module::Build::Tiny" => "0.036"
   },
   "DISTNAME" => "Dist-Zilla-Plugin-Test-NoTabs",
   "EXE_FILES" => [],
@@ -102,12 +102,13 @@ my %WriteMakefileArgs = (
     "Test::DZil" => 0,
     "Test::More" => 0,
     "Test::NoTabs" => 0,
+    "Test::Requires" => 0,
     "if" => 0,
     "strict" => 0,
     "version" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.07",
+  "VERSION" => "0.08",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -134,6 +135,7 @@ my %FallbackPrereqs = (
   "Test::DZil" => 0,
   "Test::More" => 0,
   "Test::NoTabs" => 0,
+  "Test::Requires" => 0,
   "if" => 0,
   "namespace::autoclean" => 0,
   "strict" => 0,

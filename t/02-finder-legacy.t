@@ -7,6 +7,8 @@ use Test::DZil;
 use Path::Tiny;
 use File::pushd 'pushd';
 
+use Test::Requires { 'Dist::Zilla::Dist::Builder' => '5.007' }; # for NoFiles
+
 BEGIN {
     use Dist::Zilla::Plugin::Test::NoTabs;
     $Dist::Zilla::Plugin::Test::NoTabs::VERSION = 9999
@@ -21,7 +23,11 @@ my $tzil = Builder->from_config(
             path(qw(source dist.ini)) => simple_ini(
                 [ GatherDir => ],
                 [ ExecDir => ],
-                [ 'Test::NoTabs' => ],
+                [ 'Test::NoTabs' => {
+                    module_finder => [ ':NoFiles' ],
+                    script_finder => [ ':TestFiles' ],
+                  },
+                ],
             ),
             path(qw(source lib Foo.pm)) => <<'MODULE',
 package Foo;
@@ -60,14 +66,13 @@ my $content = $file->slurp_utf8;
 unlike($content, qr/[^\S\n]\n/m, 'no trailing whitespace in generated test');
 unlike($content, qr/\t/m, 'no tabs in generated test');
 
-my @files = (
+like($content, qr/'\Q$_\E'/m, "test checks $_") foreach path(qw(t foo.t));
+
+unlike($content, qr/'\Q$_\E'/m, "test does not check $_") foreach (
     path(qw(lib Foo.pm)),
     path(qw(lib Bar.pod)),
     path(qw(bin myscript)),
-    path(qw(t foo.t)),
 );
-
-like($content, qr/'\Q$_\E'/m, "test checks $_") foreach @files;
 
 # not needed, but Test::NoTabs loads it from the generated test, and $0 is wrong for it
 # (FIXME in Test::NoTabs!!)
@@ -85,6 +90,6 @@ subtest 'run the generated test' => sub
     $files_tested = Test::Builder->new->current_test;
 };
 
-is($files_tested, @files, 'correct number of files were tested');
+is($files_tested, 1, 'correct number of files were tested');
 
 done_testing;

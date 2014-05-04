@@ -46,12 +46,12 @@ my $static_prereqs = do { my $x = {
        'configure' => {
                         'requires' => {
                                         'ExtUtils::MakeMaker' => '6.30',
-                                        'Module::Build::Tiny' => '0.035'
+                                        'Module::Build::Tiny' => '0.036'
                                       }
                       },
        'develop' => {
                       'recommends' => {
-                                        'Dist::Zilla::PluginBundle::Author::ETHER' => '0.057'
+                                        'Dist::Zilla::PluginBundle::Author::ETHER' => '0.061'
                                       },
                       'requires' => {
                                       'Dist::Zilla' => '5.015',
@@ -64,7 +64,6 @@ my $static_prereqs = do { my $x = {
                                       'Dist::Zilla::Plugin::ModuleBuildTiny' => '0.004',
                                       'Dist::Zilla::Plugin::Prereqs' => '0',
                                       'Dist::Zilla::Plugin::Test::CleanNamespaces' => '0',
-                                      'Dist::Zilla::Plugin::Test::NoTabs' => '0',
                                       'Dist::Zilla::PluginBundle::Author::ETHER' => '0.024',
                                       'File::Spec' => '0',
                                       'IO::Handle' => '0',
@@ -76,7 +75,6 @@ my $static_prereqs = do { my $x = {
                                       'Test::CleanNamespaces' => '>= 0.04, != 0.06',
                                       'Test::Kwalitee' => '1.12',
                                       'Test::More' => '0.94',
-                                      'Test::NoTabs' => '0',
                                       'Test::Pod' => '1.41',
                                       'Test::Pod::Coverage' => '1.08',
                                       'Test::Warnings' => '0'
@@ -113,6 +111,7 @@ my $static_prereqs = do { my $x = {
                                    'Test::DZil' => '0',
                                    'Test::More' => '0',
                                    'Test::NoTabs' => '0',
+                                   'Test::Requires' => '0',
                                    'if' => '0',
                                    'strict' => '0',
                                    'version' => '0',

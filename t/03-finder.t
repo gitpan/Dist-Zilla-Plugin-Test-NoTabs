@@ -21,7 +21,8 @@ my $tzil = Builder->from_config(
             path(qw(source dist.ini)) => simple_ini(
                 [ GatherDir => ],
                 [ ExecDir => ],
-                [ 'Test::NoTabs' => ],
+                [ 'FileFinder::ByName' => ExtraTestFiles => { dir => 'xt' } ],
+                [ 'Test::NoTabs' => { finder => [ ':InstallModules', ':TestFiles' ] } ],
             ),
             path(qw(source lib Foo.pm)) => <<'MODULE',
 package Foo;
@@ -63,11 +64,14 @@ unlike($content, qr/\t/m, 'no tabs in generated test');
 my @files = (
     path(qw(lib Foo.pm)),
     path(qw(lib Bar.pod)),
-    path(qw(bin myscript)),
     path(qw(t foo.t)),
 );
-
 like($content, qr/'\Q$_\E'/m, "test checks $_") foreach @files;
+
+unlike($content, qr/'\Q$_\E'/m, "test does not check $_") foreach (
+    path(qw(bin myscript)),
+    path(qw(xt bar.t)),
+);
 
 # not needed, but Test::NoTabs loads it from the generated test, and $0 is wrong for it
 # (FIXME in Test::NoTabs!!)

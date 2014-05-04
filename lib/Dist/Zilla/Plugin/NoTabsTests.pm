@@ -3,7 +3,7 @@ BEGIN {
   $Dist::Zilla::Plugin::NoTabsTests::AUTHORITY = 'cpan:FLORA';
 }
 # ABSTRACT: (DEPRECATED) Release tests making sure hard tabs aren't used
-$Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.07';
+$Dist::Zilla::Plugin::NoTabsTests::VERSION = '0.08';
 use Moose;
 extends 'Dist::Zilla::Plugin::Test::NoTabs';
 
@@ -21,15 +21,13 @@ __END__
 
 =encoding UTF-8
 
-=for :stopwords Florian Ragwitz
-
 =head1 NAME
 
 Dist::Zilla::Plugin::NoTabsTests - (DEPRECATED) Release tests making sure hard tabs aren't used
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 

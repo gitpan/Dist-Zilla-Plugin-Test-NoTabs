@@ -15,6 +15,8 @@ lib/Dist/Zilla/Plugin/NoTabsTests.pm
 lib/Dist/Zilla/Plugin/Test/NoTabs.pm
 t/00-report-prereqs.t
 t/01-basic.t
+t/02-finder-legacy.t
+t/03-finder.t
 weaver.ini
 xt/author/00-compile.t
 xt/author/pod-spell.t
@@ -26,9 +28,7 @@ xt/release/eol.t
 xt/release/kwalitee.t
 xt/release/minimum-version.t
 xt/release/mojibake.t
-xt/release/no-tabs.t
 xt/release/pod-coverage.t
 xt/release/pod-no404s.t
 xt/release/pod-syntax.t
 xt/release/portability.t
-xt/release/unused-vars.t
