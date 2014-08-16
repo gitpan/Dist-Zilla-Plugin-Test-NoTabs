@@ -21,33 +21,10 @@ my $tzil = Builder->from_config(
         add_files => {
             path(qw(source dist.ini)) => simple_ini(
                 [ GatherDir => ],
-                [ ExecDir => ],
                 [ MetaConfig => ],
-                [ 'Test::NoTabs' => ],
+                [ 'Test::NoTabs' => { filename => 'xt/release/foo.t' } ],
             ),
-            path(qw(source lib Foo.pm)) => <<'MODULE',
-package Foo;
-use strict;
-use warnings;
-1;
-MODULE
-            path(qw(source lib Bar.pod)) => <<'POD',
-package Bar;
-=pod
-
-=cut
-POD
-            path(qw(source bin myscript)) => <<'SCRIPT',
-use strict;
-use warnings;
-print "hello there!\n";
-SCRIPT
-            path(qw(source t foo.t)) => <<'TEST',
-use strict;
-use warnings;
-use Test::More tests => 1;
-pass('hi!');
-TEST
+            path(qw(source lib Foo.pm)) => "package Foo;\n1\n",
         },
     },
 );
@@ -56,21 +33,12 @@ $tzil->chrome->logger->set_debug(1);
 $tzil->build;
 
 my $build_dir = path($tzil->tempdir)->child('build');
-my $file = $build_dir->child(qw(xt author no-tabs.t));
-ok( -e $file, 'test created');
+my $file = $build_dir->child(qw(xt release foo.t));
+ok( -e $file, 'test created, using the custom filename');
 
 my $content = $file->slurp_utf8;
 unlike($content, qr/[^\S\n]\n/m, 'no trailing whitespace in generated test');
 unlike($content, qr/\t/m, 'no tabs in generated test');
-
-my @files = (
-    path(qw(lib Foo.pm)),
-    path(qw(lib Bar.pod)),
-    path(qw(bin myscript)),
-    path(qw(t foo.t)),
-);
-
-like($content, qr/'\Q$_\E'/m, "test checks $_") foreach @files;
 
 cmp_deeply(
     $tzil->distmeta,
@@ -90,7 +58,7 @@ cmp_deeply(
                     config => {
                         'Dist::Zilla::Plugin::Test::NoTabs' => {
                             finder => [ ':InstallModules', ':ExecFiles', ':TestFiles' ],
-                            filename => 'xt/author/no-tabs.t',
+                            filename => 'xt/release/foo.t',
                         },
                     },
                     name => 'Test::NoTabs',
@@ -101,26 +69,6 @@ cmp_deeply(
     }),
     'prereqs are properly injected for the develop phase; dumped configs are good',
 ) or diag 'got distmeta: ', explain $tzil->distmeta;
-
-
-# not needed, but Test::NoTabs loads it from the generated test, and $0 is wrong for it
-# (FIXME in Test::NoTabs!!)
-use FindBin;
-
-my $files_tested;
-
-subtest 'run the generated test' => sub
-{
-    my $wd = pushd $build_dir;
-
-    do $file;
-    note 'ran tests successfully' if not $@;
-    fail($@) if $@;
-
-    $files_tested = Test::Builder->new->current_test;
-};
-
-is($files_tested, @files, 'correct number of files were tested');
 
 diag 'got log messages: ', explain $tzil->log_messages
     if not Test::Builder->new->is_passing;

@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-Plugin-Test-NoTabs
 
+0.09      2014-08-16 23:14:24Z
+    - generated test file now defaults to xt/author/no-tabs.t, but is
+      configurable
+
 0.08      2014-05-04 21:24:28Z
     - deprecate the needless separated finder options, replaced by a single
       'finder' option.

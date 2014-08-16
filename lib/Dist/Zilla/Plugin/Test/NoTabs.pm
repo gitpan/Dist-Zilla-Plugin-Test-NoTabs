@@ -1,10 +1,8 @@
 package Dist::Zilla::Plugin::Test::NoTabs;
-BEGIN {
-  $Dist::Zilla::Plugin::Test::NoTabs::AUTHORITY = 'cpan:FLORA';
-}
-# git description: v0.07-7-gbdea33e
-$Dist::Zilla::Plugin::Test::NoTabs::VERSION = '0.08';
+# git description: v0.08-9-gcac78e1
+$Dist::Zilla::Plugin::Test::NoTabs::VERSION = '0.09';
 # ABSTRACT: Release tests making sure hard tabs aren't used
+# KEYWORDS: plugin test testing whitespace tab formatting
 # vim: set ts=8 sw=4 tw=78 et :
 
 use Moose;
@@ -25,6 +23,12 @@ with
         default_finders => [ ':InstallModules', ':ExecFiles', ':TestFiles' ],
     },
     'Dist::Zilla::Role::PrereqSource';
+
+has filename => (
+    is => 'ro', isa => 'Str',
+    lazy => 1,
+    default => sub { return 'xt/author/no-tabs.t' },
+);
 
 has files => (
     isa => 'ArrayRef[Str]',
@@ -77,6 +81,7 @@ around dump_config => sub
 
     $config->{+__PACKAGE__} = {
          finder => $self->finder,
+         filename => $self->filename,
     };
     return $config;
 };
@@ -103,8 +108,8 @@ sub gather_files
     $self->add_file(
         $self->_file_obj(
             Dist::Zilla::File::InMemory->new(
-                name => 'xt/release/no-tabs.t',
-                content => ${$self->section_data('xt/release/no-tabs.t')},
+                name => $self->filename,
+                content => ${$self->section_data('__TEST__')},
             )
         )
     );
@@ -156,13 +161,13 @@ __PACKAGE__->meta->make_immutable;
 #pod =head1 DESCRIPTION
 #pod
 #pod This is a plugin that runs at the L<gather files|Dist::Zilla::Role::FileGatherer> stage,
-#pod providing the file F<xt/release/no-tabs.t>, a standard L<Test::NoTabs> test.
+#pod providing the file F<xt/author/no-tabs.t>, a standard L<Test::NoTabs> test.
+#pod
+#pod =head1 CONFIGURATION OPTIONS
 #pod
 #pod This plugin accepts the following options:
 #pod
-#pod =over 4
-#pod
-#pod =item * C<module_finder>
+#pod =head2 C<module_finder>
 #pod
 #pod =for stopwords FileFinder
 #pod
@@ -176,16 +181,19 @@ __PACKAGE__->meta->make_immutable;
 #pod You can define your own with the
 #pod L<[FileFinder::ByName]|Dist::Zilla::Plugin::FileFinder::ByName> plugin.
 #pod
-#pod
 #pod =for stopwords executables
 #pod
 #pod Just like C<module_finder>, but for finding scripts.  The default value is
 #pod C<:ExecFiles> (see also L<Dist::Zilla::Plugin::ExecDir>) and C<:TestFiles>.
 #pod
-#pod =item * C<file>: a filename to also test, in addition to any files found
+#pod =head2 C<file>
+#pod
+#pod a filename to also test, in addition to any files found
 #pod earlier. This option can be repeated to specify multiple additional files.
 #pod
-#pod =back
+#pod =head2 C<filename>
+#pod
+#pod The filename of the test to add - defaults to F<xt/author/no-tabs.t>.
 #pod
 #pod =cut
 
@@ -199,7 +207,7 @@ Dist::Zilla::Plugin::Test::NoTabs - Release tests making sure hard tabs aren't u
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -212,18 +220,18 @@ In your F<dist.ini>:
 =head1 DESCRIPTION
 
 This is a plugin that runs at the L<gather files|Dist::Zilla::Role::FileGatherer> stage,
-providing the file F<xt/release/no-tabs.t>, a standard L<Test::NoTabs> test.
-
-This plugin accepts the following options:
-
-=over 4
-
-=item * C<module_finder>
+providing the file F<xt/author/no-tabs.t>, a standard L<Test::NoTabs> test.
 
 =for Pod::Coverage::TrustPod mvp_aliases
     register_prereqs
     gather_files
     munge_files
+
+=head1 CONFIGURATION OPTIONS
+
+This plugin accepts the following options:
+
+=head2 C<module_finder>
 
 =for stopwords FileFinder
 
@@ -242,10 +250,14 @@ L<[FileFinder::ByName]|Dist::Zilla::Plugin::FileFinder::ByName> plugin.
 Just like C<module_finder>, but for finding scripts.  The default value is
 C<:ExecFiles> (see also L<Dist::Zilla::Plugin::ExecDir>) and C<:TestFiles>.
 
-=item * C<file>: a filename to also test, in addition to any files found
+=head2 C<file>
+
+a filename to also test, in addition to any files found
 earlier. This option can be repeated to specify multiple additional files.
 
-=back
+=head2 C<filename>
+
+The filename of the test to add - defaults to F<xt/author/no-tabs.t>.
 
 =head1 AUTHOR
 
@@ -260,12 +272,14 @@ the same terms as the Perl 5 programming language system itself.
 
 =head1 CONTRIBUTOR
 
+=for stopwords Karen Etheridge
+
 Karen Etheridge <ether@cpan.org>
 
 =cut
 
 __DATA__
-___[ xt/release/no-tabs.t ]___
+___[ __TEST__ ]___
 use strict;
 use warnings;
 

@@ -51,10 +51,11 @@ TEST
     },
 );
 
+$tzil->chrome->logger->set_debug(1);
 $tzil->build;
 
 my $build_dir = path($tzil->tempdir)->child('build');
-my $file = $build_dir->child(qw(xt release no-tabs.t));
+my $file = $build_dir->child(qw(xt author no-tabs.t));
 ok( -e $file, 'test created');
 
 my $content = $file->slurp_utf8;
@@ -84,11 +85,15 @@ subtest 'run the generated test' => sub
     my $wd = pushd $build_dir;
 
     do $file;
-    warn $@ if $@;
+    note 'ran tests successfully' if not $@;
+    fail($@) if $@;
 
     $files_tested = Test::Builder->new->current_test;
 };
 
 is($files_tested, @files, 'correct number of files were tested');
+
+diag 'got log messages: ', explain $tzil->log_messages
+    if not Test::Builder->new->is_passing;
 
 done_testing;
